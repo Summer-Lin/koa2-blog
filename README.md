@@ -1,2 +1,1 @@
-# koa2-blog
-koa2-blog
+# 基于node-koa2的博客
