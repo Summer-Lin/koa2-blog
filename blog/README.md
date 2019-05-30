@@ -68,10 +68,20 @@
 7  进入  bin文件夹的 www文件,更改 端口号, 避免冲突, 3000 端口号改 4000
 8  开启项目,npm run dev, 因为有nodemon,所以更改代码会实时编译 
 9  打开postman调用接口  http://localhost:4000/api/v1/user/register 
-如下图,则注册接口成功
+   如下图,则注册接口成功
 ```
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/2.png)
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/3.png)
+
+```js
+1 在controllers文件夹下 user.js 文件,编写 login 方法
+2 在routes文件夹的 index.js 文件添加 用户登录 接口
+3 postman调用接口  http://localhost:4000/api/v1/user/login
+  如下图,则登录接口成功
+```
+![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/4.png)
+
+
 
 
 

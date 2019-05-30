@@ -12,6 +12,8 @@ const routers = new router({
  */
 // 用户注册
 routers.post('/user/register', user.create);
+// 用户登录
+routers.post('/user/login', user.login);
 
 
 module.exports = routers

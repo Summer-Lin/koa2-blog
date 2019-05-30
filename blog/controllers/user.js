@@ -87,6 +87,51 @@ class User {
         }
       }
     }
+
+    static async login(ctx) {
+      const {username, email, password} = ctx.request.body
+      //查询用户是否存在
+      const userDetail = await UserModel.queryUsername(username)
+console.log("username++++++++++++++++++", userDetail)
+      if (!userDetail) {
+        ctx.response.status = 200;
+        ctx.body = {
+          code: 403,
+          message: "用户不存在"
+        }
+
+        return false;
+      }
+      console.log("username--------------", userDetail)
+      // 验证密码是否正确
+      if(bcrypt.compareSync(password, userDetail.password)) {
+        const userToken = {
+          username: userDetail.username,
+          id: userDetail.id,
+          email: userDetail.email
+        }
+        const token = jwt.sign(userToken, secret.sign, {expiresIn: '1h'});
+
+        ctx.response.status = 200
+        ctx.body = {
+          code: 200,
+          message: "登录成功",
+          data: {
+            username: userDetail.username,
+            id: userDetail.id,
+            email: userDetail.email,
+            token: token
+          }
+        }
+
+      } else {
+         ctx.response.status = 200
+         ctx.body = {
+           code: 200,
+           message: "用户名或密码错误"
+         }
+      }
+    }
 }
 
 module.exports = User
