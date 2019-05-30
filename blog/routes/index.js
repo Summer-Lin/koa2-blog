@@ -1,19 +1,17 @@
-const router = require('koa-router')()
+const router = require('koa-router')
+//引入User控制层
+const user = require('../controllers/user')
 
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
+
+const routers = new router({
+  prefix: '/api/v1'
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
+/**
+ * 用户接口
+ */
+// 用户注册
+routers.post('/user/register', user.create);
 
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
-})
 
-module.exports = router
+module.exports = routers
