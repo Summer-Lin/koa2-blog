@@ -8,9 +8,27 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const JWTToken = require('./middleware/JWTToken')
+const secret = require("./config/secret.json")
+const jwt = require('koa-jwt')
 
 // error handler
 onerror(app)
+
+app.use(JWTToken())
+
+// 此接口列表，unless表示过滤不用jwt验证
+app.use(jwt({
+  secret: secret.sign
+}).unless({
+  path: [
+    //登录
+    /^\/api\/v1\/user\/login/,
+    //注册
+    /^\/api\/v1\/user\/register/,
+   
+  ]
+}))
 
 // middlewares
 app.use(bodyparser({

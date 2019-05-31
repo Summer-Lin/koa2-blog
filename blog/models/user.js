@@ -45,6 +45,16 @@ class UserModel {
          }
        })
     }
+    /**
+     * 查找用户列表
+     *
+     * @return  {[type]}  [return description]
+     */
+    static async findAllUserList() {
+      return await User.findAll({
+        attributes: ['id', 'username', 'email']
+      })
+    }
 }
 
 module.exports = UserModel

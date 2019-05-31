@@ -6,21 +6,21 @@
 - 1 根据koa2创建项目
 ```js
 //安装koa-generator，利用koa-generator快速搭建Node.js服务器
-1.npm install koa-generator -g  
+1. npm install koa-generator -g  
 //用koa2创建文件夹
-2.koa2 blog 
+2. koa2 blog 
 // 进入文件夹,并安装依赖
-3.cd blog && npm install
+3. cd blog && npm install
 //启动项目  
-4.npm  start
+4. npm  start
 //浏览器打开下面网址,初始项目建成
 //看到“Hello Koa 2!”就是启动成功了！
-5.localhost:3000
+5. localhost:3000
 ```
 - 2 安装mysql数据库
 ```js
 1. 官网下载安装数据库
-  版本号: mysql  Ver 8.0.16 for Win64 on x86_64 (MySQL Community Server - GPL)
+  版本号: mysql  Ver 8. 0.16 for Win64 on x86_64 (MySQL Community Server - GPL)
 2. 下载安装navicat, mysql的可视化软件  
 3. 设置数据库, 账户名 root  密码  123456
 ```
@@ -54,8 +54,10 @@
 └── controllers
     └── user.js
 ```
-
+#### 二 实现接口调用
+- 1 完成注册接口
 ```js
+//实现注册接口
 1. 在schema文件夹下 user.js 配置创建用户的数据库格式
 2. 在models文件夹下配置 user.js 配置传入username, password, email
    编写 create 方法 和 queryUsername 方法
@@ -73,7 +75,9 @@
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/2.png)
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/3.png)
 
+- 2 完成登录接口
 ```js
+//实现登录接口
 1 在controllers文件夹下 user.js 文件,编写 login 方法
 2 在routes文件夹的 index.js 文件添加 用户登录 接口
 3 postman调用接口  http://localhost:4000/api/v1/user/login
@@ -81,7 +85,33 @@
 ```
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/4.png)
 
+- 3 完成用户列表接口
+```
+// 实现获取用户列表接口
+1 在models文件夹下 user.js 编写 findAllUserList 方法 
+2 在controllers文件夹下 user.js 文件,编写 list 方法
+3 在routes文件夹的 index.js 文件添加 获取用户列表 接口
+4 postman调用接口  http://localhost:4000/api/v1/user/list
+  如下图,则 获取用户列表 接口成功
+```
+![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/5.png)
 
+- 4 token过滤 和 解决token验证问题
+```
+// 接口不是随便给别人乱调用的,所以就得增加token验证
+// 使用koa-jwt插件
+1 建文件夹 middleware, 建JWTToken.js, JWTPath.js文件并编码
+2 在app.js引起 JWTToken 文件,并且 use
+3 安装koa-jwt   npm install koa-jwt --save  
+4 在app.js  引入 secret.json文件,
+  引入 koa-jwt,并且进行配置,过滤不需要进行token验证列表.
+```
+  - token过期
+![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/6.png)
+  - 登录接口实现 免校验token
+![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/7.png)
+  - 不传token 错误
+![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/8.png)
 
 
 

@@ -14,6 +14,8 @@ const routers = new router({
 routers.post('/user/register', user.create);
 // 用户登录
 routers.post('/user/login', user.login);
+//获取用户列表
+routers.get('/user/list', user.list);
 
 
 module.exports = routers

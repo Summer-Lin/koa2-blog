@@ -87,12 +87,19 @@ class User {
         }
       }
     }
-
+    /**
+     * 用户登录
+     *
+     * @param ctx username 用户名字
+              ctx password 用户密码
+     *
+     * @return  返回token和用户信息
+     */
     static async login(ctx) {
-      const {username, email, password} = ctx.request.body
+      const {username, password} = ctx.request.body
       //查询用户是否存在
       const userDetail = await UserModel.queryUsername(username)
-console.log("username++++++++++++++++++", userDetail)
+
       if (!userDetail) {
         ctx.response.status = 200;
         ctx.body = {
@@ -102,7 +109,7 @@ console.log("username++++++++++++++++++", userDetail)
 
         return false;
       }
-      console.log("username--------------", userDetail)
+      
       // 验证密码是否正确
       if(bcrypt.compareSync(password, userDetail.password)) {
         const userToken = {
@@ -132,6 +139,33 @@ console.log("username++++++++++++++++++", userDetail)
          }
       }
     }
+    /**
+     * 获取用户列表
+     *
+     * @param   
+     *
+     * @return  返回 用户列表
+     */
+    static async list(ctx) {
+      console.log("ctx==========", ctx)
+      try {
+        const data = await UserModel.findAllUserList();
+        
+        ctx.response.status = 200;
+        ctx.body = {
+          code: 200,
+          message: "获取成功",
+          data
+        }
+      } catch (err) {
+          ctx.response.status = 500;
+          ctx.body = {
+            code: 500,
+            message: err
+          }
+      }
+    }
+
 }
 
 module.exports = User
