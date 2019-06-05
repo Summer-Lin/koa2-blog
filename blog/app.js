@@ -11,11 +11,29 @@ const users = require('./routes/users')
 const JWTToken = require('./middleware/JWTToken')
 const secret = require("./config/secret.json")
 const jwt = require('koa-jwt')
+const cors = require('koa-cors');
 
 // error handler
 onerror(app)
 
 app.use(JWTToken())
+// 解决跨域问题
+app.use(cors());
+
+// token 错误抛出,必须写在 jwt上面
+app.use(function (ctx, next) {
+  return next().catch((err) => {
+    if (err.status === 401) {
+      ctx.status = 200;
+      ctx.body = {
+        code: 401,
+        data: err
+      };
+    } else {
+      throw err;
+    }
+  });
+});
 
 // 此接口列表，unless表示过滤不用jwt验证
 app.use(jwt({
@@ -38,9 +56,10 @@ app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(views(__dirname + '/views', {
-  extension: 'pug'
-}))
+
+// app.use(views(__dirname + '/views', {
+//   extension: 'pug'
+// }))
 
 // logger
 app.use(async (ctx, next) => {

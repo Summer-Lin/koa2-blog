@@ -105,6 +105,7 @@
 3 安装koa-jwt   npm install koa-jwt --save  
 4 在app.js  引入 secret.json文件,
   引入 koa-jwt,并且进行配置,过滤不需要进行token验证列表.
+5 在app.js配置处理token错误的抛出内容  
 ```
   - token过期
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/6.png)
@@ -114,6 +115,32 @@
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/8.png)
 
 
+#### 三 webpack-simple创建 多页面 前端项目
+- 1.初始化项目, views文件夹下就是前端项目了
+```
+// 进入views文件夹,基于 webpack-simple 创建项目
+1. vue init webpack-simple
+// 安装less
+2. npm install less less-loader --save-dev
+// 安装插件配置多页面和清除工具
+3. npm install html-webpack-plugin clean-webpack-plugin --save-dev
+// 安装iview vue-router axios
+4. npm install iview vue-router axios --save
+5. 建routers文件夹配置路由
+6. webpack.config.js 进行配置多页面,后台管理系统跟前端页面用 多页面进行配置
+// 安装插件,并在.babelrc进行配置 "syntax-dynamic-import", 允许路由 懒加载引入vue文件
+7. npm install babel-plugin-syntax-dynamic-import --save-dev
+.
+.
+.
+采用的是iview3, 引入的时候有样式报错,在webpack.config.js进行配置
+调用登录接口,出现跨域报错.如下图
+在node后台目录安装koa-cors, 然后在app.js引入,跨域即可解决
+npm install koa-cors --save
+
+完成后台管理系统布局  登录,退出,获取用户列表接口对接
+```
+![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/9.png)
 
 
 
