@@ -44,6 +44,9 @@ app.use(jwt({
     /^\/api\/v1\/user\/login/,
     //注册
     /^\/api\/v1\/user\/register/,
+    //  /^\/api\/v1\/upload/,
+    // 可以获取图片静态资源 
+     /^\/images/,
    
   ]
 }))

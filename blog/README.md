@@ -139,9 +139,37 @@
 npm install koa-cors --save
 
 完成后台管理系统布局  登录,退出,获取用户列表接口对接
+
+后台登录页面链接:  http://localhost:8963/backend.html#/login
 ```
 ![image](https://github.com/Summer-Lin/koa2-blog/blob/master/blogImg/9.png)
 
+
+#### 四 搭建node 上传图片功能
+```
+自己可以到"www.qiniu.com" 申请自己的七牛空间,
+采用七牛的上传方法.但我觉得麻烦,就自己弄上传图片功能,把图片
+上传到项目的public文件夹.
+// 上传图片的插件。
+1. npm install --save koa-multer
+2. controllers文件夹下配置 upload.js
+3. routes文件夹下,配置 index.js, 配置路由
+//因为 app.js 里面配置app.use(require('koa-static')(__dirname + '/public'))
+  所以静态资源文件上传后,路径是
+  "http://localhost:4000/images/1560394369870.jpeg"
+4. app.js添加 图片的过滤规则,不然获取图片需要token验证, 添加 /^\/images/,
+
+```
+
+#### 五 创建 新增/编辑/删除 分类接口
+```
+1.先创建  添加分类接口
+2.再创建  获取分类列表  接口
+3.再创建  删除分类  接口
+4.再创建  更新分类  接口
+5.写对应的页面
+目前还找不到TOKEN总是1个小时过期的解决方法.
+```
 
 
 

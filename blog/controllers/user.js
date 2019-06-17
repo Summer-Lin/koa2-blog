@@ -134,8 +134,11 @@ class User {
       } else {
          ctx.response.status = 200
          ctx.body = {
-           code: 200,
-           message: "用户名或密码错误"
+           code: 401,
+           data: {
+              message: "用户名或密码错误"
+           }
+           
          }
       }
     }

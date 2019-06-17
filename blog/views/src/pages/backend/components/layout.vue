@@ -21,16 +21,15 @@
                   <Icon type="ios-navigate"></Icon>
                   用户
                 </template>
-                <MenuItem name="1-1">用户列表</MenuItem>
+                <MenuItem name="1-1" :to="{name: 'userList'}">用户列表</MenuItem>
 
               </Submenu>
               <Submenu name="2">
                 <template slot="title">
                   <Icon type="ios-keypad"></Icon>
-                  Item 2
+                  分类管理
                 </template>
-                <MenuItem name="2-1">Option 1</MenuItem>
-                <MenuItem name="2-2">Option 2</MenuItem>
+                <MenuItem name="2-1" :to="{name: 'classifyList'}">分类列表</MenuItem>
               </Submenu>
               <Submenu name="3">
                 <template slot="title">

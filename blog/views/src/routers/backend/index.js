@@ -16,6 +16,7 @@ const routes = [
     name: "login",
     component: _import("login/index")
   },
+  //用户模块
   {
     path: '/user',
     name: "user-container",
@@ -31,10 +32,39 @@ const routes = [
         component: _import("user/index"),
       }
     ]
+  },
+  //分类
+  {
+    path: '/classify',
+    name: "classify",
+    component: layout,
+    redirect: {
+      name: "classifyList"
+    },
+    children: [
+      //分类列表
+      {
+        path: '/',
+        name: "classifyList",
+        component: _import("classify/index"),
+      },
+      //新增分类
+      {
+        path: 'create',
+        name: "classifyCreate",
+        component: _import("classify/createOrUpdate"),
+      },
+      //编辑分类
+      {
+        path: 'edit',
+        name: "classifyEdit",
+        component: _import("classify/createOrUpdate"),
+      }
+    ]
   }
 ]
 
 
 export default new VueRouter({
-routes
+  routes
 })

@@ -28,7 +28,6 @@ ajax.interceptors.request.use(config => {
 
 // 添加响应拦截器
 ajax.interceptors.response.use(response => {
-  console.log(response)
 
   if (expireToken.indexOf(response.data.code) > -1) {
     bus.$Message.error(response.data.data.message);
